@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmBridge</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--g:#2E7D32;--dg:#1B5E20;--lg:#E8F5E9;--o:#F57C00;--b:#5D4037;--t:#212121;--l:#757575;--bg:#FAFAFA;--w:#fff;--s:0 4px 6px rgba(0,0,0,.1);--sl:0 20px 25px rgba(0,0,0,.1)}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{color:var(--t);background:var(--bg);line-height:1.6}
+nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);box-shadow:var(--s);z-index:1000}
+.nav-c{max-width:1200px;margin:auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:1.5rem;font-weight:700;color:var(--g);text-decoration:none;display:flex;align-items:center;gap:.5rem}
+.logo i{color:var(--o)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{text-decoration:none;color:var(--t);font-weight:500}
+.nav-links a:hover{color:var(--g)}
+.btn{padding:.6rem 1.2rem;border:none;border-radius:6px;font-weight:600;cursor:pointer;transition:.3s;text-decoration:none;display:inline-block;font-size:.95rem}
+.btn-o{background:transparent;color:var(--g);border:2px solid var(--g)}
+.btn-o:hover{background:var(--g);color:#fff}
+.btn-p{background:var(--g);color:#fff;border:2px solid var(--g)}
+.btn-p:hover{background:var(--dg);transform:translateY(-2px);box-shadow:var(--s)}
+.btn-a{background:var(--o);color:#fff;border:2px solid var(--o)}
+.btn-a:hover{background:#E65100;transform:translateY(-2px)}
+.mob{display:none;background:none;border:none;font-size:1.5rem;color:var(--g);cursor:pointer}
+.hero{margin-top:70px;background:linear-gradient(135deg,var(--lg) 0%,#C8E6C9 100%);padding:4rem 2rem}
+.hero-c{max-width:1200px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+.hero-c h1{font-size:3rem;line-height:1.2;margin-bottom:1rem;color:var(--dg)}
+.hero-c p{font-size:1.25rem;color:var(--l);margin-bottom:2rem}
+.h-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.hero-img{position:relative}
+.hero-img img{width:100%;border-radius:12px;box-shadow:var(--sl);height:400px;object-fit:cover}
+.f-card{position:absolute;background:#fff;padding:1rem;border-radius:8px;box-shadow:var(--s);display:flex;align-items:center;gap:.75rem;font-size:.9rem;font-weight:600;animation:fl 3s ease-in-out infinite}
+.f-card span{display:block;font-size:.75rem;color:var(--l);font-weight:400}
+.f1{bottom:20px;left:-20px}
+.f2{top:20px;right:-20px;animation-delay:1.5s}
+@keyframes fl{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.f-card i{font-size:1.5rem;color:var(--o)}
+.stats{background:var(--w);padding:3rem 2rem;border-bottom:1px solid #eee}
+.stats-c{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center}
+.stat h3{font-size:2.5rem;color:var(--g);margin-bottom:.5rem}
+.stat p{color:var(--l);font-weight:500}
+.sec{padding:5rem 2rem;max-width:1200px;margin:auto}
+.sec-h{text-align:center;margin-bottom:3rem}
+.sec-h h2{font-size:2.25rem;margin-bottom:.5rem}
+.sec-h p{color:var(--l);font-size:1.1rem}
+.f-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem}
+.f-card2{background:#fff;padding:2rem;border-radius:12px;box-shadow:var(--s);transition:.3s;border-top:4px solid var(--g)}
+.f-card2:hover{transform:translateY(-5px);box-shadow:var(--sl)}
+.f-card2 i{font-size:2.5rem;color:var(--g);margin-bottom:1rem}
+.f-card2 h3{margin-bottom:.5rem}
+.f-card2 p{color:var(--l)}
+.market{background:var(--lg);padding:5rem 2rem}
+.market-c{max-width:1200px;margin:auto}
+.filts{display:flex;justify-content:center;gap:1rem;margin-bottom:2rem;flex-wrap:wrap}
+.filt{padding:.5rem 1.5rem;border:2px solid var(--g);background:transparent;color:var(--g);border-radius:25px;cursor:pointer;font-weight:600;transition:.3s}
+.filt.active,.filt:hover{background:var(--g);color:#fff}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem}
+.p-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--s);transition:.3s}
+.p-card:hover{transform:translateY(-5px);box-shadow:var(--sl)}
+.p-img{width:100%;height:200px;object-fit:cover;background:#ddd}
+.p-info{padding:1.5rem}
+.p-h{display:flex;justify-content:space-between;align-items:start;margin-bottom:.5rem}
+.p-t{font-size:1.25rem;font-weight:700}
+.p-pr{color:var(--o);font-weight:700;font-size:1.1rem}
+.p-m{display:flex;align-items:center;gap:.5rem;color:var(--l);font-size:.9rem;margin-bottom:1rem}
+.p-m i{color:var(--g)}
+.p-f{display:flex;justify-content:space-between;align-items:center;margin-top:1rem;padding-top:1rem;border-top:1px solid #eee}
+.f-inf{display:flex;align-items:center;gap:.5rem;font-size:.9rem;font-weight:600}
+.f-av{width:30px;height:30px;border-radius:50%;background:var(--lg);display:flex;align-items:center;justify-content:center;color:var(--g)}
+.how{padding:5rem 2rem;max-width:1200px;margin:auto}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2rem;margin-top:3rem}
+.step{text-align:center;padding:2rem}
+.s-num{width:60px;height:60px;background:var(--g);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;margin:0 auto 1.5rem}
+.step h3{margin-bottom:.5rem}
+.step p{color:var(--l)}
+.test{background:var(--b);color:#fff;padding:5rem 2rem}
+.test-c{max-width:1200px;margin:auto}
+.test .sec-h h2,.test .sec-h p{color:#fff}
+.t-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:3rem}
+.t-card{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:2rem;border-radius:12px;border:1px solid rgba(255,255,255,.2)}
+.t-card p{font-style:italic;margin-bottom:1.5rem;line-height:1.8}
+.t-auth{display:flex;align-items:center;gap:1rem}
+.t-av{width:50px;height:50px;border-radius:50%;background:var(--o);display:flex;align-items:center;justify-content:center;font-weight:700}
+.t-auth h4{margin-bottom:.2rem}
+.t-auth span{font-size:.9rem;opacity:.8}
+.cta{padding:5rem 2rem;text-align:center;background:linear-gradient(135deg,var(--g) 0%,var(--dg) 100%);color:#fff}
+.cta h2{font-size:2.5rem;margin-bottom:1rem}
+.cta p{font-size:1.2rem;margin-bottom:2rem;opacity:.9}
+.c-btns{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+.btn-w{background:#fff;color:var(--g);border:2px solid #fff}
+.btn-w:hover{background:transparent;color:#fff}
+footer{background:var(--t);color:#fff;padding:3rem 2rem 1rem}
+.f-c{max-width:1200px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;margin-bottom:2rem}
+.f-sec h3{margin-bottom:1rem;color:var(--lg)}
+.f-sec ul{list-style:none}
+.f-sec li{margin-bottom:.5rem}
+.f-sec a{color:#aaa;text-decoration:none;transition:.3s}
+.f-sec a:hover{color:#fff}
+.soc{display:flex;gap:1rem;margin-top:1rem}
+.soc a{width:40px;height:40px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.3s}
+.soc a:hover{background:var(--g)}
+.f-bot{text-align:center;padding-top:2rem;border-top:1px solid #333;color:#777}
+.modal-o{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:2000;justify-content:center;align-items:center;padding:1rem}
+.modal-o.active{display:flex}
+.modal{background:#fff;border-radius:12px;width:100%;max-width:450px;padding:2rem;position:relative;animation:su .3s ease}
+@keyframes su{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-c{position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:var(--l)}
+.modal h2{margin-bottom:1.5rem;color:var(--dg)}
+.fg{margin-bottom:1.25rem}
+.fg label{display:block;margin-bottom:.5rem;font-weight:600}
+.fg input,.fg select{width:100%;padding:.75rem;border:2px solid #e0e0e0;border-radius:6px;font-size:1rem;transition:.3s}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--g)}
+.mf{margin-top:1.5rem;text-align:center;font-size:.9rem;color:var(--l)}
+.mf a{color:var(--g);text-decoration:none;font-weight:600}
+@media(max-width:768px){.nav-links,.nav-buttons{display:none}.mob{display:block}.hero-c{grid-template-columns:1fr;text-align:center}.hero-c h1{font-size:2.25rem}.hero-img{order:-1}.f-card{display:none}.h-btns{justify-content:center}.stats-c{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+<div class="nav-c">
+<a href="#" class="logo"><i class="fas fa-seedling"></i>FarmBridge</a>
+<ul class="nav-links"><li><a href="#home">Home</a></li><li><a href="#market">Marketplace</a></li><li><a href="#feat">For Farmers</a></li><li><a href="#how">How It Works</a></li><li><a href="#contact">Contact</a></li></ul>
+<div class="nav-buttons"><button class="btn btn-o" onclick="openModal('login')">Log In</button><button class="btn btn-p" onclick="openModal('signup')">Get Started</button></div>
+<button class="mob" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+</div>
+</nav>
+
+<section class="hero" id="home">
+<div class="hero-c">
+<div>
+<h1>Fresh From The Farm To Your Doorstep</h1>
+<p>Empowering farmers with direct market access. Connect with buyers, set fair prices, and grow your business with zero middlemen.</p>
+<div class="h-btns"><a href="#market" class="btn btn-p">Browse Marketplace</a><a href="#feat" class="btn btn-o">Start Selling</a></div>
+</div>
+<div class="hero-img">
+<img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=80" alt="Farmer">
+<div class="f-card f1"><i class="fas fa-check-circle"></i><div>Verified Farmers<span>100% Traceable Produce</span></div></div>
+<div class="f-card f2"><i class="fas fa-truck-fast"></i><div>Fast Logistics<span>Same-day Delivery</span></div></div>
+</div>
+</div>
+</section>
+
+<section class="stats">
+<div class="stats-c">
+<div class="stat"><h3>12,000+</h3><p>Registered Farmers</p></div>
+<div class="stat"><h3>45,000+</h3><p>Active Buyers</p></div>
+<div class="stat"><h3>₹50Cr+</h3><p>Transactions Done</p></div>
+<div class="stat"><h3>28</h3><p>States Covered</p></div>
+</div>
+</section>
+
+<section class="sec" id="feat">
+<div class="sec-h"><h2>Why Choose FarmBridge?</h2><p>Tools designed for both farmers and buyers to thrive together.</p></div>
+<div class="f-grid">
+<div class="f-card2"><i class="fas fa-hand-holding-dollar"></i><h3>Fair Pricing</h3><p>No middlemen means farmers keep up to 40% more profit. Buyers get fresh produce at better rates.</p></div>
+<div class="f-card2"><i class="fas fa-qrcode"></i><h3>Full Traceability</h3><p>Every product comes with a digital footprint. Know exactly where your food comes from.</p></div>
+<div class="f-card2"><i class="fas fa-truck"></i><h3>Integrated Logistics</h3><p>We handle the transport. From farm pickup to doorstep delivery, freshness is preserved.</p></div>
+<div class="f-card2"><i class="fas fa-chart-line"></i><h3>Market Insights</h3><p>Access real-time price trends, demand forecasting, and crop recommendations.</p></div>
+<div class="f-card2"><i class="fas fa-shield-halved"></i><h3>Secure Payments</h3><p>Escrow-based payment system ensures farmers get paid on time and buyers receive quality.</p></div>
+<div class="f-card2"><i class="fas fa-users"></i><h3>Community Support</h3><p>Join a network of progressive farmers. Share knowledge and get expert advice.</p></div>
+</div>
+</section>
+
+<section class="market" id="market">
+<div class="market-c">
+<div class="sec-h"><h2>Live Marketplace</h2><p>Fresh produce listed daily by verified farmers across the country.</p></div>
+<div class="filts"><button class="filt active" onclick="filterProducts('all')">All</button><button class="filt" onclick="filterProducts('vegetables')">Vegetables</button><button class="filt" onclick="filterProducts('fruits')">Fruits</button><button class="filt" onclick="filterProducts('grains')">Grains</button><button class="filt" onclick="filterProducts('dairy')">Dairy</button></div>
+<div class="p-grid" id="productsGrid"></div>
+</div>
+</section>
+
+<section class="how" id="how">
+<div class="sec-h"><h2>How It Works</h2><p>Getting started is easy. Join thousands of farmers already selling directly.</p></div>
+<div class="steps">
+<div class="step"><div class="s-num">1</div><h3>Create Account</h3><p>Sign up as a farmer or buyer. Complete verification in under 5 minutes.</p></div>
+<div class="step"><div class="s-num">2</div><h3>List or Browse</h3><p>Farmers list their harvest. Buyers browse thousands of fresh listings.</p></div>
+<div class="step"><div class="s-num">3</div><h3>Connect & Negotiate</h3><p>Chat directly, negotiate bulk deals, and finalize terms transparently.</p></div>
+<div class="step"><div class="s-num">4</div><h3>Deliver & Pay</h3><p>We handle logistics and secure payments. Everyone gets what they agreed on.</p></div>
+</div>
+</section>
+
+<section class="test">
+<div class="test-c">
+<div class="sec-h"><h2>Success Stories</h2><p>Hear from farmers and buyers transforming agriculture.</p></div>
+<div class="t-grid">
+<div class="t-card"><p>"FarmBridge changed my life. I used to sell tomatoes to middlemen for ₹15/kg. Now I sell directly to hotels for ₹35/kg. My income has doubled."</p><div class="t-auth"><div class="t-av">RK</div><div><h4>Rajesh Kumar</h4><span>Vegetable Farmer, Maharashtra</span></div></div></div>
+<div class="t-card"><p>"As a restaurant owner, quality matters. With FarmBridge, I know exactly which farm my produce comes from. My customers taste the difference."</p><div class="t-auth"><div class="t-av">AP</div><div><h4>Anita Patel</h4><span>Restaurant Owner, Bangalore</span></div></div></div>
+<div class="t-card"><p>"The logistics support is a game-changer. I can sell my dairy products 200km away and they still arrive fresh. Payments are instant and secure."</p><div class="t-auth"><div class="t-av">SS</div><div><h4>Surinder Singh</h4><span>Dairy Farmer, Punjab</span></div></div></div>
+</div>
+</div>
+</section>
+
+<section class="cta">
+<h2>Ready to Transform Your Farm Business?</h2>
+<p>Join India's fastest growing agricultural marketplace today.</p>
+<div class="c-btns"><button class="btn btn-w" onclick="openModal('signup')">Register as Farmer</button><button class="btn btn-a" onclick="openModal('signup')">Register as Buyer</button></div>
+</section>
+
+<footer id="contact">
+<div class="f-c">
+<div class="f-sec"><h3>FarmBridge</h3><p style="color:#aaa;font-size:13px">Building India's most trusted agricultural marketplace. Connecting rural farms to urban markets since 2023.</p><div class="soc"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a></div></div>
+<div class="f-sec"><h3>For Farmers</h3><ul><li><a href="#">How to Sell</a></li><li><a href="#">Pricing Trends</a></li><li><a href="#">Logistics Support</a></li><li><a href="#">Success Stories</a></li></ul></div>
+<div class="f-sec"><h3>For Buyers</h3><ul><li><a href="#">Browse Produce</a></li><li><a href="#">Bulk Orders</a></li><li><a href="#">Quality Guarantee</a></li><li><a href="#">Enterprise Solutions</a></li></ul></div>
+<div class="f-sec"><h3>Contact Us</h3><ul><li>support@farmbridge.in</li><li>1800-FARM-HELP</li><li>Agri-Tech Park, Pune</li></ul></div>
+</div>
+<div class="f-bot">© FarmBridge Technologies Pvt. Ltd. All rights reserved.</div>
+</footer>
+
+<div class="modal-o" id="authModal">
+<div class="modal">
+<button class="modal-c" onclick="closeModal()">&times;</button>
+<h2 id="modalTitle">Get Started</h2>
+<form onsubmit="handleAuth(event)">
+<div class="fg"><label>Full Name</label><input type="text" placeholder="Enter your full name" required></div>
+<div class="fg"><label>Phone Number</label><input type="tel" placeholder="Enter your mobile number" required></div>
+<div class="fg"><label>I am a</label><select required><option value="">Select role</option><option value="farmer">Farmer / Producer</option><option value="buyer">Buyer / Retailer</option><option value="exporter">Exporter</option></select></div>
+<div class="fg"><label>Password</label><input type="password" placeholder="Create a password" required></div>
+<button type="submit" class="btn btn-p" style="width:100%">Create Account</button>
+</form>
+<div class="mf">Already have an account? <a href="#" onclick="switchModal('login')">Log in</a></div>
+</div>
+</div>
+
+<script>
+const products=[
+{id:1,name:"Organic Tomatoes",category:"vegetables",price:"₹32/kg",qty:"500 kg",location:"Nashik, MH",farmer:"Ramesh P.",image:"https://images.unsplash.com/photo-1592924357228-91a4daadcfea?auto=format&fit=crop&w=400&q=80"},
+{id:2,name:"Alphonso Mangoes",category:"fruits",price:"₹450/dz",qty:"200 dz",location:"Ratnagiri, MH",farmer:"Ganesh S.",image:"https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=400&q=80"},
+{id:3,name:"Basmati Rice",category:"grains",price:"₹85/kg",qty:"2000 kg",location:"Karnal, HR",farmer:"Dev Singh",image:"https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80"},
+{id:4,name:"Fresh Milk",category:"dairy",price:"₹55/ltr",qty:"100 ltr",location:"Anand, GJ",farmer:"Patel Dairy",image:"https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=400&q=80"},
+{id:5,name:"Red Onions",category:"vegetables",price:"₹28/kg",qty:"1000 kg",location:"Lasalgaon, MH",farmer:"Kishore B.",image:"https://images.unsplash.com/photo-1618512496248-a07fe83aa8cb?auto=format&fit=crop&w=400&q=80"},
+{id:6,name:"Banana Bunch",category:"fruits",price:"₹80/dz",qty:"150 dz",location:"Jalgaon, MH",farmer:"Sunil K.",image:"https://images.unsplash.com/photo-1571771896612-61058d8766f8?auto=format&fit=crop&w=400&q=80"},
+{id:7,name:"Wheat Grain",category:"grains",price:"₹24/kg",qty:"5000 kg",location:"Indore, MP",farmer:"Vikram M.",image:"https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?auto=format&fit=crop&w=400&q=80"},
+{id:8,name:"Farm Eggs",category:"dairy",price:"₹8/pc",qty:"1000 pc",location:"Hyderabad, TS",farmer:"Reddy Farms",image:"https://images.unsplash.com/photo-1506976785307-8732e854ad03?auto=format&fit=crop&w=400&q=80"}
+];
+
+function renderProducts(filter='all'){
+const grid=document.getElementById('productsGrid');
+grid.innerHTML='';
+const filtered=filter==='all'?products:products.filter(p=>p.category===filter);
+filtered.forEach(p=>{
+const card=document.createElement('div');
+card.className='p-card';
+card.innerHTML=`<img src="${p.image}" alt="${p.name}" class="p-img"><div class="p-info"><div class="p-h"><div class="p-t">${p.name}</div><div class="p-pr">${p.price}</div></div><div class="p-m"><i class="fas fa-location-dot"></i> ${p.location} <span style="margin:0 8px">•</span> <i class="fas fa-weight-hanging"></i> ${p.qty}</div><div class="p-f"><div class="f-inf"><div class="f-av"><i class="fas fa-user"></i></div>${p.farmer}</div><button class="btn btn-p" style="padding:.4rem 1rem;font-size:.85rem">Order Now</button></div></div>`;
+grid.appendChild(card);
+});
+}
+
+function filterProducts(category){
+document.querySelectorAll('.filt').forEach(btn=>{btn.classList.remove('active');if(btn.textContent.toLowerCase().includes(category)||(category==='all'&&btn.textContent==='All'))btn.classList.add('active');});
+renderProducts(category);
+}
+
+function openModal(type){
+document.getElementById('modalTitle').textContent=type==='login'?'Welcome Back':'Create Your Account';
+document.getElementById('authModal').classList.add('active');
+}
+function closeModal(){document.getElementById('authModal').classList.remove('active');}
+function switchModal(type){openModal(type);}
+function handleAuth(e){e.preventDefault();alert('Welcome to FarmBridge! (This is a demo)');closeModal();}
+function toggleMobileMenu(){alert('Mobile menu toggle - add a drawer ('authmodal').addeventlistener('click', function(e))
+    
+renderproducts();
+</script>
+</body>
+</html>
